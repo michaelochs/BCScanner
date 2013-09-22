@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="IQT-al-rVa">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="Kur-qd-flW">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="IQT-al-rVa" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZZV-aL-d2d">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Cqt-w0-BiR" kind="relationship" relationship="rootViewController" id="iNL-77-cKV"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vx8-Ph-zac" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-172" y="-215"/>
+        </scene>
+        <!--Main View Controller-->
+        <scene sceneID="2Xc-ow-eaD">
+            <objects>
+                <viewController id="Cqt-w0-BiR" customClass="MainViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Was-lr-Duc"/>
+                        <viewControllerLayoutGuide type="bottom" id="lhQ-zG-d4r"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tWs-31-TpV">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fwc-2F-wIJ">
+                                <rect key="frame" x="143" y="269" width="35" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Scan">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="openScanner:" destination="Cqt-w0-BiR" eventType="touchUpInside" id="CO0-lV-6an"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Fwc-2F-wIJ" firstAttribute="centerX" secondItem="tWs-31-TpV" secondAttribute="centerX" id="Iyg-SH-kDT"/>
+                            <constraint firstItem="Fwc-2F-wIJ" firstAttribute="centerY" secondItem="tWs-31-TpV" secondAttribute="centerY" id="x0Y-I8-vIW"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="ct6-PP-smA"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PXs-py-VDz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="315" y="-215"/>
+        </scene>
+    </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>
