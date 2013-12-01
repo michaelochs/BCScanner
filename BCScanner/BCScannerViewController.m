@@ -209,13 +209,16 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 	
 	self.previewView.session = self.session;
 	
-	UIImage *hudImage = [self.delegate scannerHUDImage:self];
-	if (hudImage) {
-		UIImageView *hudImageView = [[UIImageView alloc] initWithImage:hudImage];
-		hudImageView.contentMode = UIViewContentModeScaleToFill;
-		[self.previewView addSubview:hudImageView];
-		_hudImageView = hudImageView;
-	}
+    if ([self.delegate respondsToSelector:@selector(scannerHUDImage:)])
+    {
+        UIImage *hudImage = [self.delegate scannerHUDImage:self];
+        if (hudImage) {
+            UIImageView *hudImageView = [[UIImageView alloc] initWithImage:hudImage];
+            hudImageView.contentMode = UIViewContentModeScaleToFill;
+            [self.previewView addSubview:hudImageView];
+            _hudImageView = hudImageView;
+        }
+    }
 	
 	UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(focusAndExpose:)];
 	[self.previewView addGestureRecognizer:tapRecognizer];
