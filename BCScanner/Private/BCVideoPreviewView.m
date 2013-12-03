@@ -57,6 +57,7 @@
 - (void)configureLayer
 {
 	self.previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+    self.torchMode = AVCaptureTorchModeAuto;
 }
 
 - (AVCaptureVideoPreviewLayer *)previewLayer
@@ -70,17 +71,7 @@
 
 - (AVCaptureDevice *)captureDevice
 {
-	NSArray *inputPorts = [self.previewLayer.connection inputPorts];
-	for (AVCaptureInputPort *port in inputPorts) {
-		if ([[port mediaType] isEqualToString:AVMediaTypeVideo]) {
-			AVCaptureInput *input = [port input];
-			if ([input isKindOfClass:[AVCaptureDeviceInput class]]) {
-				AVCaptureDevice *device = [(AVCaptureDeviceInput *)input device];
-				return device;
-			}
-		}
-	}
-	return nil;
+    return [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
 }
 
 - (BOOL)focusAtPoint:(CGPoint)point
@@ -129,6 +120,14 @@
 	}
 }
 
+- (void)setTorchMode:(AVCaptureTorchMode)torchMode
+{
+    _torchMode = torchMode;
+    
+    AVCaptureDevice *device = [self captureDevice];
+    [device lockForConfiguration:nil];
+    device.torchMode = torchMode;
+}
 
 
 #pragma mark - accessors

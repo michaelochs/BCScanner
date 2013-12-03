@@ -19,6 +19,8 @@
 
 #import <UIKit/UIKit.h>
 
+@import AVFoundation;
+
 
 extern NSString *const BCScannerQRCode; /// The code type used for QR codes.
 extern NSString *const BCScannerUPCECode;
@@ -82,6 +84,17 @@ extern NSString *const BCScannerEAN8Code;
  * more precisely control what taps should be recognized.
  */
 @property (nonatomic, weak, readonly) UITapGestureRecognizer *focusAndExposeGestureRecognizer;
+
+/**
+ *  Defines the video preview torch mode.
+ */
+@property (nonatomic) BOOL torchEnabled;
+
+/**
+ *  Hides or displays the torch button in the navigation bar.
+ *  The default value is YES.
+ */
+@property (nonatomic) BOOL torchButtonEnabled;
 
 @end
 
