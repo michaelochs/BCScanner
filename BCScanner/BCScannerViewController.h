@@ -96,6 +96,11 @@ extern NSString *const BCScannerEAN8Code;
  */
 @property (nonatomic) BOOL torchButtonEnabled;
 
+/**
+ *  Indicates if the torch mode is available. Varies depending on the device.
+ */
+@property (nonatomic, readonly) BOOL isTorchModeAvailable;
+
 @end
 
 

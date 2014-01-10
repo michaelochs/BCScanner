@@ -222,9 +222,12 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
         }
     }
     
-    self.torchButton = [[UIBarButtonItem alloc] initWithTitle:@"Torch" style:UIBarButtonItemStyleBordered target:self action:@selector(pressedTorchButton:)];
-    self.navigationItem.rightBarButtonItems = @[self.torchButton];
-    self.torchButtonEnabled = YES;
+	if (self.isTorchModeAvailable)
+	{
+		self.torchButton = [[UIBarButtonItem alloc] initWithTitle:@"Torch" style:UIBarButtonItemStyleBordered target:self action:@selector(pressedTorchButton:)];
+		self.navigationItem.rightBarButtonItems = @[self.torchButton];
+		self.torchButtonEnabled = YES;
+	}
 	
 	UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(focusAndExpose:)];
 	[self.previewView addGestureRecognizer:tapRecognizer];
@@ -321,19 +324,22 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 
 - (IBAction)pressedTorchButton:(UIBarButtonItem *)sender
 {
-    self.torchEnabled = ! self.torchEnabled;
+	self.torchEnabled = (self.isTorchModeAvailable && ! self.torchEnabled);
 }
 
 - (void)setTorchEnabled:(BOOL)torchEnabled
 {
     _torchEnabled = torchEnabled;
-    [self previewView].torchMode = (torchEnabled ? AVCaptureTorchModeOn : AVCaptureTorchModeOff);
+	if (self.isTorchModeAvailable)
+	{
+		self.previewView.torchMode = (torchEnabled ? AVCaptureTorchModeOn : AVCaptureTorchModeOff);
+	}
 }
 
 - (void)setTorchButtonEnabled:(BOOL)torchButtonEnabled
 {
     _torchButtonEnabled = torchButtonEnabled;
-    self.torchButton.enabled = torchButtonEnabled;
+	self.torchButton.enabled = (self.isTorchModeAvailable && torchButtonEnabled);
 }
 
 #pragma mark - capturing
@@ -369,6 +375,11 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 
 
 #pragma mark - accessors
+
+- (BOOL)isTorchModeAvailable
+{
+	return self.previewView.isTorchModeAvailable;
+}
 
 - (BCVideoPreviewView *)previewView
 {

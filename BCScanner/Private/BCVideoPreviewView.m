@@ -124,11 +124,18 @@
 {
     _torchMode = torchMode;
     
-    AVCaptureDevice *device = [self captureDevice];
-    [device lockForConfiguration:nil];
-    device.torchMode = torchMode;
+    [self.captureDevice lockForConfiguration:nil];
+	
+	if (self.captureDevice.isTorchAvailable)
+	{
+		self.captureDevice.torchMode = torchMode;
+	}
 }
 
+- (BOOL)isTorchModeAvailable
+{
+	return self.captureDevice.isTorchAvailable;
+}
 
 #pragma mark - accessors
 
