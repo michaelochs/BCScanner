@@ -51,6 +51,8 @@ NSString *const BCScannerEAN8Code = @"BCScannerEAN8Code";
 @property (nonatomic, weak, readwrite) AVCaptureMetadataOutput *metadataOutput;
 @property (nonatomic, strong, readwrite) dispatch_queue_t metadataQueue;
 
+@property (nonatomic, strong) UIBarButtonItem *torchButton;
+
 @end
 
 
@@ -219,6 +221,13 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
             _hudImageView = hudImageView;
         }
     }
+    
+	if (self.isTorchModeAvailable)
+	{
+		self.torchButton = [[UIBarButtonItem alloc] initWithTitle:@"Torch" style:UIBarButtonItemStyleBordered target:self action:@selector(pressedTorchButton:)];
+		self.navigationItem.rightBarButtonItems = @[self.torchButton];
+		self.torchButtonEnabled = YES;
+	}
 	
 	UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(focusAndExpose:)];
 	[self.previewView addGestureRecognizer:tapRecognizer];
@@ -302,7 +311,6 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 }
 
 
-
 #pragma mark - actions
 
 - (IBAction)focusAndExpose:(id)sender
@@ -314,7 +322,25 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 	}
 }
 
+- (IBAction)pressedTorchButton:(UIBarButtonItem *)sender
+{
+	self.torchEnabled = (self.isTorchModeAvailable && ! self.torchEnabled);
+}
 
+- (void)setTorchEnabled:(BOOL)torchEnabled
+{
+    _torchEnabled = torchEnabled;
+	if (self.isTorchModeAvailable)
+	{
+		self.previewView.torchMode = (torchEnabled ? AVCaptureTorchModeOn : AVCaptureTorchModeOff);
+	}
+}
+
+- (void)setTorchButtonEnabled:(BOOL)torchButtonEnabled
+{
+    _torchButtonEnabled = torchButtonEnabled;
+	self.torchButton.enabled = (self.isTorchModeAvailable && torchButtonEnabled);
+}
 
 #pragma mark - capturing
 
@@ -349,6 +375,11 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 
 
 #pragma mark - accessors
+
+- (BOOL)isTorchModeAvailable
+{
+	return self.previewView.isTorchModeAvailable;
+}
 
 - (BCVideoPreviewView *)previewView
 {
