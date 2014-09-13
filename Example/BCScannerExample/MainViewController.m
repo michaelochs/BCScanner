@@ -19,7 +19,7 @@
 
 #import "MainViewController.h"
 
-#import "../BCScanner/BCScannerViewController.h"
+#import <BCScanner/BCScanner.h>
 
 
 @interface MainViewController () <BCScannerViewControllerDelegate>
