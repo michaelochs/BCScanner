@@ -35,6 +35,7 @@
 		BCScannerViewController *scanner = [[BCScannerViewController alloc] init];
 		scanner.delegate = self;
 		scanner.codeTypes = @[ BCScannerQRCode, BCScannerEAN8Code, BCScannerEAN13Code, BCScannerUPCECode ];
+		scanner.torchButtonEnabled = YES;
 		[self.navigationController pushViewController:scanner animated:YES];
 	}
 }
