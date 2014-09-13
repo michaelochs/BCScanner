@@ -130,6 +130,8 @@
 	{
 		self.captureDevice.torchMode = torchMode;
 	}
+	
+	[self.captureDevice unlockForConfiguration];
 }
 
 - (BOOL)isTorchModeAvailable

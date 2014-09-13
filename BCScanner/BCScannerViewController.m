@@ -138,6 +138,7 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 	if (self) {
 		_codesInFOV = [NSSet set];
 		[self configureCaptureSession];
+		[self updateMetaData];
 	}
 	return self;
 }
@@ -148,6 +149,7 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 	if (self) {
 		_codesInFOV = [NSSet set];
 		[self configureCaptureSession];
+		[self updateMetaData];
 	}
 	return self;
 }
@@ -156,6 +158,21 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 {
 	[self teardownCaptureSession];
 }
+
+- (void)updateMetaData
+{
+	BOOL isVisible = self.isViewLoaded && self.view.window;
+	if (self.isTorchButtonEnabled) {
+		UIBarButtonItem *torchToggle = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"bcscanner_torch", nil, [NSBundle mainBundle], @"Torch", @"The title of the torch mode button") style:UIBarButtonItemStyleBordered target:self action:@selector(toggleTorch:)];
+		[self.navigationItem setRightBarButtonItem:torchToggle animated:isVisible];
+	} else {
+		[self.navigationItem setRightBarButtonItem:nil animated:isVisible];
+	}
+}
+
+
+
+#pragma mark - Capture Session
 
 - (void)configureCaptureSession
 {
@@ -222,13 +239,6 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
         }
     }
     
-	if (self.isTorchModeAvailable)
-	{
-		self.torchButton = [[UIBarButtonItem alloc] initWithTitle:@"Torch" style:UIBarButtonItemStyleBordered target:self action:@selector(pressedTorchButton:)];
-		self.navigationItem.rightBarButtonItems = @[self.torchButton];
-		self.torchButtonEnabled = YES;
-	}
-	
 	UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(focusAndExpose:)];
 	[self.previewView addGestureRecognizer:tapRecognizer];
 	self.focusAndExposeGestureRecognizer = tapRecognizer;
@@ -311,6 +321,7 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 }
 
 
+
 #pragma mark - actions
 
 - (IBAction)focusAndExpose:(id)sender
@@ -322,10 +333,16 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 	}
 }
 
-- (IBAction)pressedTorchButton:(UIBarButtonItem *)sender
+- (IBAction)toggleTorch:(UIBarButtonItem *)sender
 {
-	self.torchEnabled = (self.isTorchModeAvailable && ! self.torchEnabled);
+	self.torchEnabled = (self.isTorchModeAvailable && !self.isTorchEnabled);
 }
+
+
+
+#pragma mark - torch mode
+
+@synthesize torchEnabled = _torchEnabled;
 
 - (void)setTorchEnabled:(BOOL)torchEnabled
 {
@@ -336,11 +353,17 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 	}
 }
 
+- (BOOL)isTorchEnabled {
+	return _torchEnabled && self.isTorchModeAvailable;
+}
+
 - (void)setTorchButtonEnabled:(BOOL)torchButtonEnabled
 {
     _torchButtonEnabled = torchButtonEnabled;
-	self.torchButton.enabled = (self.isTorchModeAvailable && torchButtonEnabled);
+	[self updateMetaData];
 }
+
+
 
 #pragma mark - capturing
 
