@@ -8,6 +8,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios, '7.0'
   s.source       = { :git => "https://github.com/michaelochs/BCScanner.git", :commit => "ae445da822b3058fe57f8c262ef8596326f31929" }
   s.source_files  = 'BCScanner', 'BCScanner/**/*.{h,m}'
+  s.public_header_files = 'BCScanner/*.h'
   s.framework  = 'AVFoundation'
   s.requires_arc = true
 end
