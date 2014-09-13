@@ -1,0 +1,1 @@
+#import <BCScanner/BCScannerViewController.h>

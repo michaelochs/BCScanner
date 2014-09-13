@@ -1,0 +1,7 @@
+target 'BCScannerExample', :exclusive => true do
+  pod 'BCScanner', :path => '../'
+end
+
+target 'BCScannerTests', :exclusive => true do
+  pod 'BCScanner', :path => '../'
+end
