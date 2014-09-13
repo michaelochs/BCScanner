@@ -4,7 +4,7 @@ BCScanner is a barcode and qr code scanner library that makes use of the new iOS
 
 ## Requirements
 
-BCScanner is bild for the use with iOS7. If you still do support iOS6, make sure to check the +[BCScanner scannerAvailable] method bevore making any other calls to BCScanner. BCScanner is not compatible with iOS6 because of the internal use of new AVFoundation API.
+BCScanner is bild for the use with iOS7. If you still do support iOS6, make sure to check the `+[BCScanner scannerAvailable]` method bevore making any other calls to BCScanner. BCScanner is not compatible with iOS6 because of the internal use of new AVFoundation API.
 BCScanner also requires you to use ARC.
 
 ## Dependencies
@@ -15,24 +15,26 @@ BCScanner also requires you to use ARC.
 
 ## Beta
 
-BCScanner is beta. Some issues will get fixed within the next couple of weeks. Feel free to send pull requests. The open TODOs are:
-- When using multiple codes together with a hud immage the animation will break when relayouting the screen (e.g. when rotating).
-- There should be a block based API for those use cases where only scanning one barcode is required.
-- As this is beta, there might be changes in the API that may break the current API.
-- Not all supported code types of AVFoundation are added to BCScanner yet. Currently supported types are: QR, UPCE, EAN8 and EAN13.
-- There are no unit tests at the moment.
+BCScanner is beta. Some issues will get fixed within the next couple of weeks. Feel free to send pull requests. For a list of open issues, please have a look at the [issues section](https://github.com/michaelochs/BCScanner/issues) of this project.
 
 ## Install
 
-Add the BCScanner project to your project.
-Set the header search path to "$(BUILT_PRODUCTS_DIR)/../../Headers". (Including the quotes!)
-Add BCScanner as a target dependency and in the linker phase.
-Make sure to set the -ObjC linker flag in your build settings.
+Add the library through cocoapods. Currently you need to reference the git repository directly, this will change in the next release.
+
+    pod 'BCScanner', :git => 'https://github.com/michaelochs/BCScanner.git'
+
 See BCScannerExample target for a reference, if you have problems, linking the library.
 
-## Licence
+### cocoapods
 
-Copyright 2013 bitecode, Michael Ochs
+A public cocoapods release is coming with the 0.1.0 release in the next weeks.
+
+### Example
+
+To build the example project run `pod install` inside the `Example` folder.
+
+
+## Licence
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
