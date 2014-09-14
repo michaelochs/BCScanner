@@ -1,9 +1,4 @@
 //
-//  MainViewController.h
-//  BCScanner
-//
-//	Copyright 2013 bitecode, Michael Ochs
-//
 //	Licensed under the Apache License, Version 2.0 (the "License");
 //	you may not use this file except in compliance with the License.
 //	You may obtain a copy of the License at
@@ -17,11 +12,23 @@
 //	limitations under the License.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
-@interface MainViewController : UIViewController
+#import "BCScannerViewController.h"
 
-- (IBAction)openScanner:(id)sender;
-- (IBAction)openScannerBlockBased:(id)sender;
+
+@interface BCScannerDelegate : NSObject <BCScannerViewControllerDelegate>
+
+@property (nonatomic, copy, readonly) void(^completionHandler)(NSString *code);
+
+/**
+ Initializes a new delegate object that call the completion handler when a
+ scanner view controller finds the first code.
+ 
+ @param completionHandler called when a code was found
+ 
+ @return The configured instance of the scanner delegate
+ */
++ (instancetype)delegateWithCompletionHandler:(void(^)(NSString *code))completionHandler;
 
 @end

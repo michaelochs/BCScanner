@@ -39,6 +39,13 @@
 	}
 }
 
+- (IBAction)openScannerBlockBased:(id)sender
+{
+	[self bcscanner_presentScannerWithCodeTypes:@[ BCScannerQRCode ] completionHandler:^(NSString *code) {
+		NSLog(@"Found: [%@]", code);
+	}];
+}
+
 
 
 #pragma mark - BCScannerViewControllerDelegate
