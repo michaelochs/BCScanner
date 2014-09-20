@@ -51,6 +51,8 @@ NSString *const BCScannerEAN8Code = @"BCScannerEAN8Code";
 @property (nonatomic, weak, readwrite) AVCaptureMetadataOutput *metadataOutput;
 @property (nonatomic, strong, readwrite) dispatch_queue_t metadataQueue;
 
+@property (nonatomic, strong) UIBarButtonItem *torchButton;
+
 @end
 
 
@@ -136,6 +138,7 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 	if (self) {
 		_codesInFOV = [NSSet set];
 		[self configureCaptureSession];
+		[self updateMetaData];
 	}
 	return self;
 }
@@ -146,6 +149,7 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 	if (self) {
 		_codesInFOV = [NSSet set];
 		[self configureCaptureSession];
+		[self updateMetaData];
 	}
 	return self;
 }
@@ -154,6 +158,21 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 {
 	[self teardownCaptureSession];
 }
+
+- (void)updateMetaData
+{
+	BOOL isVisible = self.isViewLoaded && self.view.window;
+	if (self.isTorchButtonEnabled) {
+		UIBarButtonItem *torchToggle = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"bcscanner_torch", nil, [NSBundle mainBundle], @"Torch", @"The title of the torch mode button") style:UIBarButtonItemStyleBordered target:self action:@selector(toggleTorch:)];
+		[self.navigationItem setRightBarButtonItem:torchToggle animated:isVisible];
+	} else {
+		[self.navigationItem setRightBarButtonItem:nil animated:isVisible];
+	}
+}
+
+
+
+#pragma mark - Capture Session
 
 - (void)configureCaptureSession
 {
@@ -219,7 +238,7 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
             _hudImageView = hudImageView;
         }
     }
-	
+    
 	UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(focusAndExpose:)];
 	[self.previewView addGestureRecognizer:tapRecognizer];
 	self.focusAndExposeGestureRecognizer = tapRecognizer;
@@ -314,6 +333,36 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 	}
 }
 
+- (IBAction)toggleTorch:(UIBarButtonItem *)sender
+{
+	self.torchEnabled = (self.isTorchModeAvailable && !self.isTorchEnabled);
+}
+
+
+
+#pragma mark - torch mode
+
+@synthesize torchEnabled = _torchEnabled;
+
+- (void)setTorchEnabled:(BOOL)torchEnabled
+{
+    _torchEnabled = torchEnabled;
+	if (self.isTorchModeAvailable)
+	{
+		self.previewView.torchMode = (torchEnabled ? AVCaptureTorchModeOn : AVCaptureTorchModeOff);
+	}
+}
+
+- (BOOL)isTorchEnabled {
+	return _torchEnabled && self.isTorchModeAvailable;
+}
+
+- (void)setTorchButtonEnabled:(BOOL)torchButtonEnabled
+{
+    _torchButtonEnabled = torchButtonEnabled;
+	[self updateMetaData];
+}
+
 
 
 #pragma mark - capturing
@@ -349,6 +398,11 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 
 
 #pragma mark - accessors
+
+- (BOOL)isTorchModeAvailable
+{
+	return self.previewView.isTorchModeAvailable;
+}
 
 - (BCVideoPreviewView *)previewView
 {

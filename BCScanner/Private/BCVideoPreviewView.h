@@ -28,6 +28,9 @@
 @property (nonatomic, strong, readwrite) AVCaptureSession *session;
 @property (nonatomic, assign, readwrite) AVCaptureVideoOrientation videoOrientation;
 
+@property (nonatomic) AVCaptureTorchMode torchMode;
+@property (nonatomic, assign, readonly, getter = isTorchModeAvailable) BOOL torchModeAvailable;
+
 - (BOOL)focusAtPoint:(CGPoint)point;
 - (BOOL)exposeAtPoint:(CGPoint)point;
 

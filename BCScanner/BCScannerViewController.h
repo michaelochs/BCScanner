@@ -83,6 +83,22 @@ extern NSString *const BCScannerEAN8Code;
  */
 @property (nonatomic, weak, readonly) UITapGestureRecognizer *focusAndExposeGestureRecognizer;
 
+/**
+ *  Defines the video preview torch mode.
+ */
+@property (nonatomic, assign, readwrite, getter = isTorchEnabled) BOOL torchEnabled;
+
+/**
+ *  Hides or displays the torch button in the navigation bar.
+ *  The default value is YES.
+ */
+@property (nonatomic, assign, readwrite, getter = isTorchButtonEnabled) BOOL torchButtonEnabled;
+
+/**
+ *  Indicates if the torch mode is available. Varies depending on the device.
+ */
+@property (nonatomic, assign, readonly, getter = isTorchModeAvailable) BOOL torchModeAvailable;
+
 @end
 
 
