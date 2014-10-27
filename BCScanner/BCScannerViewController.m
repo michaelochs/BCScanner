@@ -263,6 +263,7 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 	[super viewDidLayoutSubviews];
 	
 	[self layoutHUD];
+	[self updateRectOfInterest];
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
@@ -318,6 +319,22 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 			
 		} completion:NULL];
 	}
+}
+
+- (void)updateRectOfInterest
+{
+	CGRect rectOfInterest = (CGRect){
+		.origin = {
+			.x = CGRectGetMinX(self.scannerArea) / CGRectGetWidth(self.view.bounds),
+			.y = CGRectGetMinY(self.scannerArea) / CGRectGetHeight(self.view.bounds)
+		},
+		.size = {
+			.width = CGRectGetWidth(self.scannerArea) / CGRectGetWidth(self.view.bounds),
+			.height = CGRectGetHeight(self.scannerArea) / CGRectGetHeight(self.view.bounds)
+		}
+	};
+	
+	self.metadataOutput.rectOfInterest = rectOfInterest;
 }
 
 
@@ -398,6 +415,14 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 
 
 #pragma mark - accessors
+
+- (void)setScannerArea:(CGRect)scannerArea
+{
+	_scannerArea = scannerArea;
+	if (self.isViewLoaded) {
+		[self updateRectOfInterest];
+	}
+}
 
 - (BOOL)isTorchModeAvailable
 {
