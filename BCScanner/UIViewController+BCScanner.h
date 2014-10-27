@@ -30,7 +30,8 @@
        cancelled the scanner, no completion handler is called!
  
  @param codeTypes         An array of all code types that should be scanned for
- @param completionHandler The completion handler that is called when a code is found
+ @param completionHandler The completion handler that is called when a code is
+                          found
  
  @return The created view controller. You can configure this view controller.
  */
