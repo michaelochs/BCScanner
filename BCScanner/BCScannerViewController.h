@@ -84,6 +84,20 @@ extern NSString *const BCScannerEAN8Code;
 @property (nonatomic, weak, readonly) UITapGestureRecognizer *focusAndExposeGestureRecognizer;
 
 /**
+ * Defines the rect of the view controller's view that describes the active area
+ * that is used by `AVFoundation` to scan for barcodes.
+ *
+ * @note all codes that are completely visible by the active camera and
+ *       intersect with the specified area are scanned. The code does not need
+ *       to be completely inside the scanner area.
+ */
+@property (nonatomic, assign, readwrite) CGRect scannerArea;
+
+
+
+#pragma mark - torch
+
+/**
  *  Defines the video preview torch mode.
  */
 @property (nonatomic, assign, readwrite, getter = isTorchEnabled) BOOL torchEnabled;
