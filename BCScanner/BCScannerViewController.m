@@ -26,6 +26,7 @@
 
 NSString *const BCScannerQRCode = @"BCScannerQRCode";
 NSString *const BCScannerUPCECode = @"BCScannerUPCECode";
+NSString *const BCScannerI25Code = @"BCScannerI25Code";
 
 //NSString *const BCScannerCode39Code = @"BCScannerCode39Code";
 //NSString *const BCScannerCode39Mod43Code = @"BCScannerCode39Mod43Code";
@@ -98,7 +99,8 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 		aspectRatios = @{ BCScannerQRCode: @1,
 						  BCScannerEAN8Code: @1.1833333333,
 						  BCScannerEAN13Code: @1.4198113208,
-						  BCScannerUPCECode: @0.8538812785 };
+                          BCScannerUPCECode: @0.8538812785,
+						  BCScannerI25Code: @0.8538812785 };
 	});
 	return aspectRatios[code];
 }
@@ -111,7 +113,8 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 		objectTypes = @{ BCScannerQRCode: AVMetadataObjectTypeQRCode,
 						 BCScannerEAN8Code: AVMetadataObjectTypeEAN8Code,
 						 BCScannerEAN13Code: AVMetadataObjectTypeEAN13Code,
-						 BCScannerUPCECode: AVMetadataObjectTypeUPCECode };
+                         BCScannerUPCECode: AVMetadataObjectTypeUPCECode,
+                         BCScannerI25Code: AVMetadataObjectTypeInterleaved2of5Code };
 	});
 	return objectTypes[code];
 }
@@ -263,7 +266,7 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 	[super viewDidLayoutSubviews];
 	
 	[self layoutHUD];
-	[self updateRectOfInterest];
+//	[self updateRectOfInterest];
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration

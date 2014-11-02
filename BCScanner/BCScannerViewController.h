@@ -22,6 +22,7 @@
 
 extern NSString *const BCScannerQRCode; /// The code type used for QR codes.
 extern NSString *const BCScannerUPCECode;
+extern NSString *const BCScannerI25Code;
 
 //extern NSString *const BCScannerCode39Code;
 //extern NSString *const BCScannerCode39Mod43Code;
