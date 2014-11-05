@@ -323,6 +323,10 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 
 - (void)updateRectOfInterest
 {
+	if (CGRectEqualToRect(self.scannerArea, CGRectZero)) {
+		self.metadataOutput.rectOfInterest = CGRectMake(0.0, 0.0, 1.0, 1.0);
+		return;
+	}
 	CGRect rectOfInterest = (CGRect){
 		.origin = {
 			.x = CGRectGetMinX(self.scannerArea) / CGRectGetWidth(self.view.bounds),

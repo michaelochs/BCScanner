@@ -87,6 +87,9 @@ extern NSString *const BCScannerEAN8Code;
 /**
  Defines the rect of the view controller's view that describes the active area
  that is used by `AVFoundation` to scan for barcodes.
+ 
+ The default value is `CGRectZero` which turns this feature off and always uses
+ the whole camera input as a capturing area.
 
  @note all codes that are completely visible by the active camera and intersect
        with the specified area are scanned. The code does not need to be
