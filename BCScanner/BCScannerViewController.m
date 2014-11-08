@@ -268,7 +268,7 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 	[super viewDidLayoutSubviews];
 	
 	[self layoutHUD];
-//	[self updateRectOfInterest];
+	[self updateRectOfInterest];
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
