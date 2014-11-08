@@ -21,6 +21,8 @@
 
 @property (nonatomic, copy, readonly) void(^completionHandler)(NSString *code);
 
+@property (nonatomic, strong, readwrite) UIImage *hudImage;
+
 /**
  Initializes a new delegate object that call the completion handler when a
  scanner view controller finds the first code.

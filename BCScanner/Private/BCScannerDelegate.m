@@ -47,4 +47,8 @@
 	[scanner dismissViewControllerAnimated:YES completion:NULL];
 }
 
+- (UIImage *)scannerHUDImage:(BCScannerViewController *)scanner {
+	return self.hudImage;
+}
+
 @end

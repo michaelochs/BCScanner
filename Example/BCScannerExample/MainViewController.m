@@ -42,7 +42,7 @@
 
 - (IBAction)openScannerBlockBased:(id)sender
 {
-	[self bcscanner_presentScannerWithCodeTypes:@[ BCScannerQRCode ] completionHandler:^(NSString *code) {
+	[self bcscanner_presentScannerWithCodeTypes:@[ BCScannerQRCode ] hudImage:[UIImage imageNamed:@"HUD"] completionHandler:^(NSString *code) {
 		NSLog(@"Found: [%@]", code);
 	}];
 }

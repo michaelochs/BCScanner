@@ -27,11 +27,17 @@ static void *const BCScannerDelegateContext = (void *)&BCScannerDelegateContext;
 
 - (BCScannerViewController *)bcscanner_presentScannerWithCodeTypes:(NSArray *)codeTypes completionHandler:(void(^)(NSString *code))completionHandler
 {
+	return [self bcscanner_presentScannerWithCodeTypes:codeTypes hudImage:nil completionHandler:completionHandler];
+}
+
+- (BCScannerViewController *)bcscanner_presentScannerWithCodeTypes:(NSArray *)codeTypes hudImage:(UIImage *)hudImage completionHandler:(void(^)(NSString *code))completionHandler
+{
 	if (![BCScannerViewController scannerAvailable]) {
 		return nil;
 	}
 	
 	BCScannerDelegate *delegate = [BCScannerDelegate delegateWithCompletionHandler:completionHandler];
+	delegate.hudImage = hudImage;
 	
 	BCScannerViewController *viewController = [BCScannerViewController new];
 	viewController.delegate = delegate;

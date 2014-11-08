@@ -37,4 +37,6 @@
  */
 - (BCScannerViewController *)bcscanner_presentScannerWithCodeTypes:(NSArray *)codeTypes completionHandler:(void(^)(NSString *code))completionHandler;
 
+- (BCScannerViewController *)bcscanner_presentScannerWithCodeTypes:(NSArray *)codeTypes hudImage:(UIImage *)hudImage completionHandler:(void(^)(NSString *code))completionHandler;
+
 @end
