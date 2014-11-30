@@ -93,28 +93,41 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 
 + (NSNumber *)aspectRatioForCode:(NSString *)code
 {
-	static NSDictionary *aspectRatios = nil;
+	static NSMutableDictionary *aspectRatios = nil;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		aspectRatios = @{ BCScannerQRCode: @1,
+        aspectRatios =  [NSMutableDictionary
+                         dictionaryWithDictionary:@{
+                          BCScannerQRCode: @1,
 						  BCScannerEAN8Code: @1.1833333333,
 						  BCScannerEAN13Code: @1.4198113208,
-                          BCScannerUPCECode: @0.8538812785,
-						  BCScannerI25Code: @0.8538812785 };
+                          BCScannerUPCECode: @0.8538812785 }]; // horizontal
+        // add AVMetadataObjectTypeInterleaved2of5Code if iOS8+
+        if(&AVMetadataObjectTypeInterleaved2of5Code){
+            [aspectRatios setObject:@1.5 forKey:BCScannerI25Code];
+        }
 	});
 	return aspectRatios[code];
 }
 
 + (NSString *)metadataObjectTypeFromScannerCode:(NSString *)code
 {
-	static NSDictionary *objectTypes = nil;
+	static NSMutableDictionary *objectTypes = nil;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		objectTypes = @{ BCScannerQRCode: AVMetadataObjectTypeQRCode,
+        
+        objectTypes = [NSMutableDictionary
+                       dictionaryWithDictionary:@{
+                         BCScannerQRCode: AVMetadataObjectTypeQRCode,
 						 BCScannerEAN8Code: AVMetadataObjectTypeEAN8Code,
 						 BCScannerEAN13Code: AVMetadataObjectTypeEAN13Code,
                          BCScannerUPCECode: AVMetadataObjectTypeUPCECode,
-                         BCScannerI25Code: AVMetadataObjectTypeInterleaved2of5Code };
+                         BCScannerI25Code: AVMetadataObjectTypeInterleaved2of5Code }];
+        // add AVMetadataObjectTypeInterleaved2of5Code if iOS8+
+        if(&AVMetadataObjectTypeInterleaved2of5Code){
+            [objectTypes setObject:AVMetadataObjectTypeInterleaved2of5Code forKey:BCScannerI25Code];
+        }
+        
 	});
 	return objectTypes[code];
 }
