@@ -121,8 +121,7 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
                          BCScannerQRCode: AVMetadataObjectTypeQRCode,
 						 BCScannerEAN8Code: AVMetadataObjectTypeEAN8Code,
 						 BCScannerEAN13Code: AVMetadataObjectTypeEAN13Code,
-                         BCScannerUPCECode: AVMetadataObjectTypeUPCECode,
-                         BCScannerI25Code: AVMetadataObjectTypeInterleaved2of5Code }];
+                         BCScannerUPCECode: AVMetadataObjectTypeUPCECode }];
         // add AVMetadataObjectTypeInterleaved2of5Code if iOS8+
         if(&AVMetadataObjectTypeInterleaved2of5Code){
             [objectTypes setObject:AVMetadataObjectTypeInterleaved2of5Code forKey:BCScannerI25Code];
