@@ -307,7 +307,13 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 	self.hudImageView.hidden = (self.codeTypes.count == 0);
 	
 	if (self.codeTypes.count > 0) {
-		NSNumber *aspectRatio = [[self class] aspectRatioForCode:[self.codeTypes lastObject]];
+		NSNumber *aspectRatio;
+		for (int i = (int)self.codeTypes.count - 1; i >= 0; i--) {
+			aspectRatio = [[self class] aspectRatioForCode:self.codeTypes[i]];
+			if (aspectRatio) {
+				break;
+			}
+		}
 #if defined(CGFLOAT_IS_DOUBLE) && (CGFLOAT_IS_DOUBLE > 0)
 		CGFloat rawAspectRatio = [aspectRatio doubleValue];
 #else
@@ -323,6 +329,9 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 		[UIView animateKeyframesWithDuration:1.0*count delay:0.0f options:(UIViewKeyframeAnimationOptionOverrideInheritedOptions | UIViewKeyframeAnimationOptionCalculationModePaced | UIViewKeyframeAnimationOptionRepeat) animations:^{
 			[self.codeTypes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
 				NSNumber *aspectRatio = [[self class] aspectRatioForCode:obj];
+				if (aspectRatio == nil) {
+					return;
+				}
 #if defined(CGFLOAT_IS_DOUBLE) && (CGFLOAT_IS_DOUBLE > 0)
 				CGFloat rawAspectRatio = [aspectRatio doubleValue];
 #else
