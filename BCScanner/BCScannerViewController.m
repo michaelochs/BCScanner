@@ -73,7 +73,6 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 	}
 	
 	return CGRectIntegral(hudRect);
-
 }
 
 
@@ -96,16 +95,16 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 	static NSMutableDictionary *aspectRatios = nil;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-        aspectRatios =  [NSMutableDictionary
-                         dictionaryWithDictionary:@{
-                          BCScannerQRCode: @1,
-						  BCScannerEAN8Code: @1.1833333333,
-						  BCScannerEAN13Code: @1.4198113208,
-                          BCScannerUPCECode: @0.8538812785 }]; // horizontal
-        // add AVMetadataObjectTypeInterleaved2of5Code if iOS8+
-        if(&AVMetadataObjectTypeInterleaved2of5Code){
-            [aspectRatios setObject:@1.5 forKey:BCScannerI25Code];
-        }
+		aspectRatios =  [NSMutableDictionary
+						 dictionaryWithDictionary:@{
+													BCScannerQRCode: @1,
+													BCScannerEAN8Code: @1.1833333333,
+													BCScannerEAN13Code: @1.4198113208,
+													BCScannerUPCECode: @0.8538812785 }]; // horizontal
+		// add AVMetadataObjectTypeInterleaved2of5Code if iOS8+
+		if(&AVMetadataObjectTypeInterleaved2of5Code){
+			[aspectRatios setObject:@1.5 forKey:BCScannerI25Code];
+		}
 	});
 	return aspectRatios[code];
 }
@@ -115,18 +114,18 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 	static NSMutableDictionary *objectTypes = nil;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-        
-        objectTypes = [NSMutableDictionary
-                       dictionaryWithDictionary:@{
-                         BCScannerQRCode: AVMetadataObjectTypeQRCode,
-						 BCScannerEAN8Code: AVMetadataObjectTypeEAN8Code,
-						 BCScannerEAN13Code: AVMetadataObjectTypeEAN13Code,
-                         BCScannerUPCECode: AVMetadataObjectTypeUPCECode }];
-        // add AVMetadataObjectTypeInterleaved2of5Code if iOS8+
-        if(&AVMetadataObjectTypeInterleaved2of5Code){
-            [objectTypes setObject:AVMetadataObjectTypeInterleaved2of5Code forKey:BCScannerI25Code];
-        }
-        
+		
+		objectTypes = [NSMutableDictionary
+					   dictionaryWithDictionary:@{
+												  BCScannerQRCode: AVMetadataObjectTypeQRCode,
+												  BCScannerEAN8Code: AVMetadataObjectTypeEAN8Code,
+												  BCScannerEAN13Code: AVMetadataObjectTypeEAN13Code,
+												  BCScannerUPCECode: AVMetadataObjectTypeUPCECode }];
+		// add AVMetadataObjectTypeInterleaved2of5Code if iOS8+
+		if(&AVMetadataObjectTypeInterleaved2of5Code){
+			[objectTypes setObject:AVMetadataObjectTypeInterleaved2of5Code forKey:BCScannerI25Code];
+		}
+		
 	});
 	return objectTypes[code];
 }
@@ -245,17 +244,17 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 	
 	self.previewView.session = self.session;
 	
-    if ([self.delegate respondsToSelector:@selector(scannerHUDImage:)])
-    {
-        UIImage *hudImage = [self.delegate scannerHUDImage:self];
-        if (hudImage) {
-            UIImageView *hudImageView = [[UIImageView alloc] initWithImage:hudImage];
-            hudImageView.contentMode = UIViewContentModeScaleToFill;
-            [self.previewView addSubview:hudImageView];
-            _hudImageView = hudImageView;
-        }
-    }
-    
+	if ([self.delegate respondsToSelector:@selector(scannerHUDImage:)])
+	{
+		UIImage *hudImage = [self.delegate scannerHUDImage:self];
+		if (hudImage) {
+			UIImageView *hudImageView = [[UIImageView alloc] initWithImage:hudImage];
+			hudImageView.contentMode = UIViewContentModeScaleToFill;
+			[self.previewView addSubview:hudImageView];
+			_hudImageView = hudImageView;
+		}
+	}
+	
 	UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(focusAndExpose:)];
 	[self.previewView addGestureRecognizer:tapRecognizer];
 	self.focusAndExposeGestureRecognizer = tapRecognizer;
@@ -393,7 +392,7 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 
 - (void)setTorchEnabled:(BOOL)torchEnabled
 {
-    _torchEnabled = torchEnabled;
+	_torchEnabled = torchEnabled;
 	if (self.isTorchModeAvailable)
 	{
 		self.previewView.torchMode = (torchEnabled ? AVCaptureTorchModeOn : AVCaptureTorchModeOff);
@@ -406,7 +405,7 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 
 - (void)setTorchButtonEnabled:(BOOL)torchButtonEnabled
 {
-    _torchButtonEnabled = torchButtonEnabled;
+	_torchButtonEnabled = torchButtonEnabled;
 	[self updateMetaData];
 }
 
