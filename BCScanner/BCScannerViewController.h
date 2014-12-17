@@ -19,27 +19,31 @@
 
 #import <UIKit/UIKit.h>
 
-
-extern NSString *const BCScannerQRCode; /// The code type used for QR codes.
-extern NSString *const BCScannerUPCECode;
-extern NSString *const BCScannerI25Code;
-
-//extern NSString *const BCScannerCode39Code;
-//extern NSString *const BCScannerCode39Mod43Code;
-
-extern NSString *const BCScannerEAN13Code;
-extern NSString *const BCScannerEAN8Code;
-
-//extern NSString *const BCScannerCode93Code;
-//extern NSString *const BCScannerCode128Code;
-//extern NSString *const BCScannerPDF417Code;
-//extern NSString *const BCScannerAztecCode;
-
-
-
-
 @protocol BCScannerViewControllerDelegate;
 
+
+#pragma mark - code types
+
+// iOS7+
+FOUNDATION_EXTERN NSString *const BCScannerUPCECode;
+FOUNDATION_EXTERN NSString *const BCScannerCode39Code;
+FOUNDATION_EXTERN NSString *const BCScannerCode39Mod43Code;
+FOUNDATION_EXTERN NSString *const BCScannerEAN13Code;
+FOUNDATION_EXTERN NSString *const BCScannerEAN8Code;
+FOUNDATION_EXTERN NSString *const BCScannerCode93Code;
+FOUNDATION_EXTERN NSString *const BCScannerCode128Code;
+FOUNDATION_EXTERN NSString *const BCScannerPDF417Code;
+FOUNDATION_EXTERN NSString *const BCScannerQRCode;
+FOUNDATION_EXTERN NSString *const BCScannerAztecCode;
+
+// iOS8+
+FOUNDATION_EXTERN NSString *const BCScannerI25Code;
+FOUNDATION_EXTERN NSString *const BCScannerITF14Code;
+FOUNDATION_EXTERN NSString *const BCScannerDataMatrixCode;
+
+
+
+#pragma mark - controller
 
 /**
  BCScannerViewController is a view controller that wrapps the scanning
@@ -121,6 +125,9 @@ extern NSString *const BCScannerEAN8Code;
 
 @end
 
+
+
+#pragma mark - delegate
 
 @protocol BCScannerViewControllerDelegate <NSObject>
 
