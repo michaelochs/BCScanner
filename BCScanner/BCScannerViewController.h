@@ -19,27 +19,31 @@
 
 #import <UIKit/UIKit.h>
 
-
-extern NSString *const BCScannerQRCode; /// The code type used for QR codes.
-extern NSString *const BCScannerUPCECode;
-extern NSString *const BCScannerI25Code;
-
-//extern NSString *const BCScannerCode39Code;
-//extern NSString *const BCScannerCode39Mod43Code;
-
-extern NSString *const BCScannerEAN13Code;
-extern NSString *const BCScannerEAN8Code;
-
-//extern NSString *const BCScannerCode93Code;
-//extern NSString *const BCScannerCode128Code;
-//extern NSString *const BCScannerPDF417Code;
-//extern NSString *const BCScannerAztecCode;
-
-
-
-
 @protocol BCScannerViewControllerDelegate;
 
+
+#pragma mark - code types
+
+// iOS7+
+FOUNDATION_EXTERN NSString *const BCScannerUPCECode; /// The UPC-E code type.
+FOUNDATION_EXTERN NSString *const BCScannerCode39Code; /// The code 39 code type.
+FOUNDATION_EXTERN NSString *const BCScannerCode39Mod43Code; /// The code 39 code type with mod 43 support.
+FOUNDATION_EXTERN NSString *const BCScannerEAN13Code; /// The EAN 13 code type.
+FOUNDATION_EXTERN NSString *const BCScannerEAN8Code; /// The EAN 8 code type.
+FOUNDATION_EXTERN NSString *const BCScannerCode93Code; /// The code 93 code type.
+FOUNDATION_EXTERN NSString *const BCScannerCode128Code; /// The code 128 code type.
+FOUNDATION_EXTERN NSString *const BCScannerPDF417Code; /// The PDF 417 code type.
+FOUNDATION_EXTERN NSString *const BCScannerQRCode; /// The QR code type.
+FOUNDATION_EXTERN NSString *const BCScannerAztecCode; /// The aztec code type.
+
+// iOS8+
+FOUNDATION_EXTERN NSString *const BCScannerI25Code; /// The Interleaved 2 of 5 code type. This type does nothing on iOS7, as it is only supported on iOS8 and later
+FOUNDATION_EXTERN NSString *const BCScannerITF14Code; /// The ITF14 code type. This type does nothing on iOS7, as it is only supported on iOS8 and later
+FOUNDATION_EXTERN NSString *const BCScannerDataMatrixCode; /// The data matrix code type. This type does nothing on iOS7, as it is only supported on iOS8 and later
+
+
+
+#pragma mark - controller
 
 /**
  BCScannerViewController is a view controller that wrapps the scanning
@@ -121,6 +125,9 @@ extern NSString *const BCScannerEAN8Code;
 
 @end
 
+
+
+#pragma mark - delegate
 
 @protocol BCScannerViewControllerDelegate <NSObject>
 

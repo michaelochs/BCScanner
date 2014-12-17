@@ -24,20 +24,39 @@
 @import AVFoundation;
 
 
-NSString *const BCScannerQRCode = @"BCScannerQRCode";
+// iOS7+
+// AVMetadataObjectTypeUPCECode;
+// AVMetadataObjectTypeCode39Code;
+// AVMetadataObjectTypeCode39Mod43Code;
+// AVMetadataObjectTypeEAN13Code;
+// AVMetadataObjectTypeEAN8Code;
+// AVMetadataObjectTypeCode93Code;
+// AVMetadataObjectTypeCode128Code;
+// AVMetadataObjectTypePDF417Code;
+// AVMetadataObjectTypeQRCode;
+// AVMetadataObjectTypeAztecCode;
+//
+// iOS8+
+// AVMetadataObjectTypeInterleaved2of5Code;
+// AVMetadataObjectTypeITF14Code;
+// AVMetadataObjectTypeDataMatrixCode
+
+// iOS7+
 NSString *const BCScannerUPCECode = @"BCScannerUPCECode";
-NSString *const BCScannerI25Code = @"BCScannerI25Code";
-
-//NSString *const BCScannerCode39Code = @"BCScannerCode39Code";
-//NSString *const BCScannerCode39Mod43Code = @"BCScannerCode39Mod43Code";
-
+NSString *const BCScannerCode39Code = @"BCScannerCode39Code";
+NSString *const BCScannerCode39Mod43Code = @"BCScannerCode39Mod43Code";
 NSString *const BCScannerEAN13Code = @"BCScannerEAN13Code";
 NSString *const BCScannerEAN8Code = @"BCScannerEAN8Code";
+NSString *const BCScannerCode93Code = @"BCScannerCode93Code";
+NSString *const BCScannerCode128Code = @"BCScannerCode128Code";
+NSString *const BCScannerPDF417Code = @"BCScannerPDF417Code";
+NSString *const BCScannerQRCode = @"BCScannerQRCode";
+NSString *const BCScannerAztecCode = @"BCScannerAztecCode";
 
-//NSString *const BCScannerCode93Code = @"BCScannerCode93Code";
-//NSString *const BCScannerCode128Code = @"BCScannerCode128Code";
-//NSString *const BCScannerPDF417Code = @"BCScannerPDF417Code";
-//NSString *const BCScannerAztecCode = @"BCScannerAztecCode";
+// iOS8+
+NSString *const BCScannerI25Code = @"BCScannerI25Code";
+NSString *const BCScannerITF14Code = @"BCScannerITF14Code";
+NSString *const BCScannerDataMatrixCode = @"BCScannerDataMatrixCode";
 
 
 @interface BCScannerViewController () <AVCaptureMetadataOutputObjectsDelegate>
@@ -92,40 +111,63 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 
 + (NSNumber *)aspectRatioForCode:(NSString *)code
 {
-	static NSMutableDictionary *aspectRatios = nil;
+	static NSDictionary *aspectRatios = nil;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		aspectRatios =  [NSMutableDictionary
-						 dictionaryWithDictionary:@{
-													BCScannerQRCode: @1,
-													BCScannerEAN8Code: @1.1833333333,
-													BCScannerEAN13Code: @1.4198113208,
-													BCScannerUPCECode: @0.8538812785 }]; // horizontal
-		// add AVMetadataObjectTypeInterleaved2of5Code if iOS8+
-		if(&AVMetadataObjectTypeInterleaved2of5Code){
-			[aspectRatios setObject:@1.5 forKey:BCScannerI25Code];
-		}
+		// horizontal
+		aspectRatios = @{
+						 BCScannerUPCECode: @0.8538812785,
+						 BCScannerCode39Code: @1.7777777, // variable lenght, random value
+						 BCScannerCode39Mod43Code: @1.7777777, // variable lenght, random value
+						 BCScannerEAN13Code: @1.4198113208,
+						 BCScannerEAN8Code: @1.1833333333,
+						 BCScannerCode93Code: @1.7777777, // variable lenght, random value
+						 BCScannerCode128Code: @1.7777777, // variable lenght, random value
+						 BCScannerPDF417Code: @4.381, //approx.
+						 BCScannerQRCode: @1,
+						 BCScannerAztecCode: @1,
+						 
+						 BCScannerI25Code: @1.5,
+						 BCScannerITF14Code: @3.685, //approx.
+						 BCScannerDataMatrixCode: @1,
+						 };
 	});
 	return aspectRatios[code];
 }
 
 + (NSString *)metadataObjectTypeFromScannerCode:(NSString *)code
 {
-	static NSMutableDictionary *objectTypes = nil;
+	static NSDictionary *objectTypes = nil;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
+		objectTypes = @{
+						BCScannerUPCECode: AVMetadataObjectTypeUPCECode,
+						BCScannerCode39Code: AVMetadataObjectTypeCode39Code,
+						BCScannerCode39Mod43Code: AVMetadataObjectTypeCode39Mod43Code,
+						BCScannerEAN13Code: AVMetadataObjectTypeEAN13Code,
+						BCScannerEAN8Code: AVMetadataObjectTypeEAN8Code,
+						BCScannerCode93Code: AVMetadataObjectTypeCode93Code,
+						BCScannerCode128Code: AVMetadataObjectTypeCode128Code,
+						BCScannerPDF417Code: AVMetadataObjectTypePDF417Code,
+						BCScannerQRCode: AVMetadataObjectTypeQRCode,
+						BCScannerAztecCode: AVMetadataObjectTypeAztecCode,
+						};
 		
-		objectTypes = [NSMutableDictionary
-					   dictionaryWithDictionary:@{
-												  BCScannerQRCode: AVMetadataObjectTypeQRCode,
-												  BCScannerEAN8Code: AVMetadataObjectTypeEAN8Code,
-												  BCScannerEAN13Code: AVMetadataObjectTypeEAN13Code,
-												  BCScannerUPCECode: AVMetadataObjectTypeUPCECode }];
-		// add AVMetadataObjectTypeInterleaved2of5Code if iOS8+
-		if(&AVMetadataObjectTypeInterleaved2of5Code){
-			[objectTypes setObject:AVMetadataObjectTypeInterleaved2of5Code forKey:BCScannerI25Code];
+		NSMutableDictionary *optionalCodeTypes = [NSMutableDictionary new];
+		if (&AVMetadataObjectTypeInterleaved2of5Code) {
+			optionalCodeTypes[BCScannerI25Code] = AVMetadataObjectTypeInterleaved2of5Code;
+		}
+		if (&AVMetadataObjectTypeITF14Code) {
+			optionalCodeTypes[BCScannerITF14Code] = AVMetadataObjectTypeITF14Code;
+		}
+		if (&AVMetadataObjectTypeDataMatrixCode) {
+			optionalCodeTypes[BCScannerDataMatrixCode] = AVMetadataObjectTypeDataMatrixCode;
 		}
 		
+		if (optionalCodeTypes.count > 0) {
+			[optionalCodeTypes addEntriesFromDictionary:objectTypes];
+			objectTypes = [optionalCodeTypes copy];
+		}
 	});
 	return objectTypes[code];
 }
@@ -420,8 +462,8 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 	NSMutableSet *objectsAdded = [NSMutableSet setWithSet:objectsStillLiving];
 	[objectsAdded minusSet:self.codesInFOV];
 	
-//	NSMutableSet *objectsUpdated = [NSMutableSet setWithSet:objectsStillLiving];
-//	[objectsUpdated intersectSet:self.codesInFOV];
+	//	NSMutableSet *objectsUpdated = [NSMutableSet setWithSet:objectsStillLiving];
+	//	[objectsUpdated intersectSet:self.codesInFOV];
 	
 	NSMutableSet *objectsMissing = [NSMutableSet setWithSet:self.codesInFOV];
 	[objectsMissing minusSet:objectsStillLiving];
@@ -432,9 +474,9 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 		if (objectsAdded.count > 0 && [self.delegate respondsToSelector:@selector(scanner:codesDidEnterFOV:)]) {
 			[self.delegate scanner:self codesDidEnterFOV:[objectsAdded copy]];
 		}
-//		if (objectsUpdated.count > 0 && [self.delegate respondsToSelector:@selector(scanner:codesDidUpdate:)]) {
-//			[self.delegate scanner:self codesDidUpdate:[objectsUpdated copy]];
-//		}
+		//		if (objectsUpdated.count > 0 && [self.delegate respondsToSelector:@selector(scanner:codesDidUpdate:)]) {
+		//			[self.delegate scanner:self codesDidUpdate:[objectsUpdated copy]];
+		//		}
 		if (objectsMissing.count > 0 && [self.delegate respondsToSelector:@selector(scanner:codesDidLeaveFOV:)]) {
 			[self.delegate scanner:self codesDidLeaveFOV:[objectsMissing copy]];
 		}

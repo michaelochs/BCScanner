@@ -29,12 +29,16 @@
 
 @implementation MainViewController
 
++ (NSArray *)allCodeTypes {
+	return @[ BCScannerUPCECode, BCScannerCode39Code, BCScannerCode39Mod43Code, BCScannerEAN13Code, BCScannerEAN8Code, BCScannerCode93Code, BCScannerCode128Code, BCScannerPDF417Code, BCScannerQRCode, BCScannerAztecCode, BCScannerI25Code, BCScannerITF14Code, BCScannerDataMatrixCode ];
+}
+
 - (IBAction)openScanner:(id)sender
 {
 	if ([BCScannerViewController scannerAvailable]) {
 		BCScannerViewController *scanner = [[BCScannerViewController alloc] init];
 		scanner.delegate = self;
-		scanner.codeTypes = @[ BCScannerQRCode, BCScannerEAN8Code, BCScannerEAN13Code, BCScannerUPCECode ];
+		scanner.codeTypes = [MainViewController allCodeTypes];
 		scanner.torchButtonEnabled = YES;
 		[self.navigationController pushViewController:scanner animated:YES];
 	}
@@ -42,7 +46,7 @@
 
 - (IBAction)openScannerBlockBased:(id)sender
 {
-	[self bcscanner_presentScannerWithCodeTypes:@[ BCScannerQRCode, BCScannerI25Code ] hudImage:[UIImage imageNamed:@"HUD"] completionHandler:^(NSString *code) {
+	[self bcscanner_presentScannerWithCodeTypes:[MainViewController allCodeTypes] hudImage:[UIImage imageNamed:@"HUD"] completionHandler:^(NSString *code) {
 		NSLog(@"Found: [%@]", code);
 	}];
 }
