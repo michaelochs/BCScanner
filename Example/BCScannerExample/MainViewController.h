@@ -22,5 +22,6 @@
 @interface MainViewController : UIViewController
 
 - (IBAction)openScanner:(id)sender;
+- (IBAction)openScannerBlockBased:(id)sender;
 
 @end

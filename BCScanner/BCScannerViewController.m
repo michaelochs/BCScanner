@@ -24,19 +24,39 @@
 @import AVFoundation;
 
 
-NSString *const BCScannerQRCode = @"BCScannerQRCode";
+// iOS7+
+// AVMetadataObjectTypeUPCECode;
+// AVMetadataObjectTypeCode39Code;
+// AVMetadataObjectTypeCode39Mod43Code;
+// AVMetadataObjectTypeEAN13Code;
+// AVMetadataObjectTypeEAN8Code;
+// AVMetadataObjectTypeCode93Code;
+// AVMetadataObjectTypeCode128Code;
+// AVMetadataObjectTypePDF417Code;
+// AVMetadataObjectTypeQRCode;
+// AVMetadataObjectTypeAztecCode;
+//
+// iOS8+
+// AVMetadataObjectTypeInterleaved2of5Code;
+// AVMetadataObjectTypeITF14Code;
+// AVMetadataObjectTypeDataMatrixCode
+
+// iOS7+
 NSString *const BCScannerUPCECode = @"BCScannerUPCECode";
-
-//NSString *const BCScannerCode39Code = @"BCScannerCode39Code";
-//NSString *const BCScannerCode39Mod43Code = @"BCScannerCode39Mod43Code";
-
+NSString *const BCScannerCode39Code = @"BCScannerCode39Code";
+NSString *const BCScannerCode39Mod43Code = @"BCScannerCode39Mod43Code";
 NSString *const BCScannerEAN13Code = @"BCScannerEAN13Code";
 NSString *const BCScannerEAN8Code = @"BCScannerEAN8Code";
+NSString *const BCScannerCode93Code = @"BCScannerCode93Code";
+NSString *const BCScannerCode128Code = @"BCScannerCode128Code";
+NSString *const BCScannerPDF417Code = @"BCScannerPDF417Code";
+NSString *const BCScannerQRCode = @"BCScannerQRCode";
+NSString *const BCScannerAztecCode = @"BCScannerAztecCode";
 
-//NSString *const BCScannerCode93Code = @"BCScannerCode93Code";
-//NSString *const BCScannerCode128Code = @"BCScannerCode128Code";
-//NSString *const BCScannerPDF417Code = @"BCScannerPDF417Code";
-//NSString *const BCScannerAztecCode = @"BCScannerAztecCode";
+// iOS8+
+NSString *const BCScannerI25Code = @"BCScannerI25Code";
+NSString *const BCScannerITF14Code = @"BCScannerITF14Code";
+NSString *const BCScannerDataMatrixCode = @"BCScannerDataMatrixCode";
 
 
 @interface BCScannerViewController () <AVCaptureMetadataOutputObjectsDelegate>
@@ -50,6 +70,8 @@ NSString *const BCScannerEAN8Code = @"BCScannerEAN8Code";
 @property (nonatomic, weak, readonly) BCVideoPreviewView *previewView;
 @property (nonatomic, weak, readwrite) AVCaptureMetadataOutput *metadataOutput;
 @property (nonatomic, strong, readwrite) dispatch_queue_t metadataQueue;
+
+@property (nonatomic, strong) UIBarButtonItem *torchButton;
 
 @end
 
@@ -70,7 +92,6 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 	}
 	
 	return CGRectIntegral(hudRect);
-
 }
 
 
@@ -93,10 +114,23 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 	static NSDictionary *aspectRatios = nil;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		aspectRatios = @{ BCScannerQRCode: @1,
-						  BCScannerEAN8Code: @1.1833333333,
-						  BCScannerEAN13Code: @1.4198113208,
-						  BCScannerUPCECode: @0.8538812785 };
+		// horizontal
+		aspectRatios = @{
+						 BCScannerUPCECode: @0.8538812785,
+						 BCScannerCode39Code: @1.7777777, // variable lenght, random value
+						 BCScannerCode39Mod43Code: @1.7777777, // variable lenght, random value
+						 BCScannerEAN13Code: @1.4198113208,
+						 BCScannerEAN8Code: @1.1833333333,
+						 BCScannerCode93Code: @1.7777777, // variable lenght, random value
+						 BCScannerCode128Code: @1.7777777, // variable lenght, random value
+						 BCScannerPDF417Code: @4.381, //approx.
+						 BCScannerQRCode: @1,
+						 BCScannerAztecCode: @1,
+						 
+						 BCScannerI25Code: @1.5,
+						 BCScannerITF14Code: @3.685, //approx.
+						 BCScannerDataMatrixCode: @1,
+						 };
 	});
 	return aspectRatios[code];
 }
@@ -106,10 +140,34 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 	static NSDictionary *objectTypes = nil;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		objectTypes = @{ BCScannerQRCode: AVMetadataObjectTypeQRCode,
-						 BCScannerEAN8Code: AVMetadataObjectTypeEAN8Code,
-						 BCScannerEAN13Code: AVMetadataObjectTypeEAN13Code,
-						 BCScannerUPCECode: AVMetadataObjectTypeUPCECode };
+		objectTypes = @{
+						BCScannerUPCECode: AVMetadataObjectTypeUPCECode,
+						BCScannerCode39Code: AVMetadataObjectTypeCode39Code,
+						BCScannerCode39Mod43Code: AVMetadataObjectTypeCode39Mod43Code,
+						BCScannerEAN13Code: AVMetadataObjectTypeEAN13Code,
+						BCScannerEAN8Code: AVMetadataObjectTypeEAN8Code,
+						BCScannerCode93Code: AVMetadataObjectTypeCode93Code,
+						BCScannerCode128Code: AVMetadataObjectTypeCode128Code,
+						BCScannerPDF417Code: AVMetadataObjectTypePDF417Code,
+						BCScannerQRCode: AVMetadataObjectTypeQRCode,
+						BCScannerAztecCode: AVMetadataObjectTypeAztecCode,
+						};
+		
+		NSMutableDictionary *optionalCodeTypes = [NSMutableDictionary new];
+		if (&AVMetadataObjectTypeInterleaved2of5Code) {
+			optionalCodeTypes[BCScannerI25Code] = AVMetadataObjectTypeInterleaved2of5Code;
+		}
+		if (&AVMetadataObjectTypeITF14Code) {
+			optionalCodeTypes[BCScannerITF14Code] = AVMetadataObjectTypeITF14Code;
+		}
+		if (&AVMetadataObjectTypeDataMatrixCode) {
+			optionalCodeTypes[BCScannerDataMatrixCode] = AVMetadataObjectTypeDataMatrixCode;
+		}
+		
+		if (optionalCodeTypes.count > 0) {
+			[optionalCodeTypes addEntriesFromDictionary:objectTypes];
+			objectTypes = [optionalCodeTypes copy];
+		}
 	});
 	return objectTypes[code];
 }
@@ -135,7 +193,9 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 	self = [super initWithCoder:aDecoder];
 	if (self) {
 		_codesInFOV = [NSSet set];
+		_scannerArea = CGRectZero;
 		[self configureCaptureSession];
+		[self updateMetaData];
 	}
 	return self;
 }
@@ -145,7 +205,9 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
 	if (self) {
 		_codesInFOV = [NSSet set];
+		_scannerArea = CGRectZero;
 		[self configureCaptureSession];
+		[self updateMetaData];
 	}
 	return self;
 }
@@ -154,6 +216,21 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 {
 	[self teardownCaptureSession];
 }
+
+- (void)updateMetaData
+{
+	BOOL isVisible = self.isViewLoaded && self.view.window;
+	if (self.isTorchButtonEnabled) {
+		UIBarButtonItem *torchToggle = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"bcscanner_torch", nil, [NSBundle mainBundle], @"Torch", @"The title of the torch mode button") style:UIBarButtonItemStyleBordered target:self action:@selector(toggleTorch:)];
+		[self.navigationItem setRightBarButtonItem:torchToggle animated:isVisible];
+	} else {
+		[self.navigationItem setRightBarButtonItem:nil animated:isVisible];
+	}
+}
+
+
+
+#pragma mark - Capture Session
 
 - (void)configureCaptureSession
 {
@@ -209,16 +286,16 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 	
 	self.previewView.session = self.session;
 	
-    if ([self.delegate respondsToSelector:@selector(scannerHUDImage:)])
-    {
-        UIImage *hudImage = [self.delegate scannerHUDImage:self];
-        if (hudImage) {
-            UIImageView *hudImageView = [[UIImageView alloc] initWithImage:hudImage];
-            hudImageView.contentMode = UIViewContentModeScaleToFill;
-            [self.previewView addSubview:hudImageView];
-            _hudImageView = hudImageView;
-        }
-    }
+	if ([self.delegate respondsToSelector:@selector(scannerHUDImage:)])
+	{
+		UIImage *hudImage = [self.delegate scannerHUDImage:self];
+		if (hudImage) {
+			UIImageView *hudImageView = [[UIImageView alloc] initWithImage:hudImage];
+			hudImageView.contentMode = UIViewContentModeScaleToFill;
+			[self.previewView addSubview:hudImageView];
+			_hudImageView = hudImageView;
+		}
+	}
 	
 	UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(focusAndExpose:)];
 	[self.previewView addGestureRecognizer:tapRecognizer];
@@ -244,6 +321,7 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 	[super viewDidLayoutSubviews];
 	
 	[self layoutHUD];
+	[self updateRectOfInterest];
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
@@ -255,50 +333,86 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 
 - (void)layoutHUD
 {
-	UIEdgeInsets padding = UIEdgeInsetsMake(20.0f, 20.0f, 20.0f, 20.0f);
-	CGRect bounds = self.previewView.bounds;
-	bounds.origin.y += self.topLayoutGuide.length;
-	bounds.size.height -= self.topLayoutGuide.length + self.bottomLayoutGuide.length;
-	if (CGRectGetHeight(bounds) > CGRectGetWidth(bounds)) {
-		bounds.origin.y += (CGRectGetHeight(bounds) - CGRectGetWidth(bounds)) * .5f;
-		bounds.size.height = CGRectGetWidth(bounds);
-	} else {
-		bounds.origin.x += (CGRectGetWidth(bounds) - CGRectGetHeight(bounds)) * .5f;
-		bounds.size.width = CGRectGetHeight(bounds);
-	}
+	[self.hudImageView.layer removeAnimationForKey:@"hudAnimation"];
 	
 	self.hudImageView.hidden = (self.codeTypes.count == 0);
 	
-	if (self.codeTypes.count > 0) {
-		NSNumber *aspectRatio = [[self class] aspectRatioForCode:[self.codeTypes lastObject]];
-#if defined(CGFLOAT_IS_DOUBLE) && (CGFLOAT_IS_DOUBLE > 0)
-		CGFloat rawAspectRatio = [aspectRatio doubleValue];
-#else
-		CGFloat rawAspectRatio = [aspectRatio floatValue];
-#endif
-		[UIView performWithoutAnimation:^{
-			self.hudImageView.frame = HUDRect(bounds, padding, rawAspectRatio);
-		}];
+	if (self.codeTypes.count == 0) {
+		return;
 	}
 	
-	if (self.codeTypes.count > 1) {
-		NSUInteger count = self.codeTypes.count;
-		[UIView animateKeyframesWithDuration:1.0*count delay:0.0f options:(UIViewKeyframeAnimationOptionOverrideInheritedOptions | UIViewKeyframeAnimationOptionCalculationModePaced | UIViewKeyframeAnimationOptionRepeat) animations:^{
-			[self.codeTypes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-				NSNumber *aspectRatio = [[self class] aspectRatioForCode:obj];
-#if defined(CGFLOAT_IS_DOUBLE) && (CGFLOAT_IS_DOUBLE > 0)
-				CGFloat rawAspectRatio = [aspectRatio doubleValue];
-#else
-				CGFloat rawAspectRatio = [aspectRatio floatValue];
-#endif
-				CGRect frame = HUDRect(bounds, padding, rawAspectRatio);
-				[UIView addKeyframeWithRelativeStartTime:idx/(double)count relativeDuration:1/(double)count animations:^{
-					self.hudImageView.frame = frame;
-				}];
-			}];
-			
-		} completion:NULL];
+	UIEdgeInsets padding = UIEdgeInsetsMake(20.0f, 20.0f, 20.0f, 20.0f);
+	CGRect squareHUDRect = UIEdgeInsetsInsetRect(self.previewView.bounds, padding);
+	squareHUDRect.origin.y += self.topLayoutGuide.length;
+	squareHUDRect.size.height -= self.topLayoutGuide.length + self.bottomLayoutGuide.length;
+	if (CGRectGetHeight(squareHUDRect) > CGRectGetWidth(squareHUDRect)) {
+		squareHUDRect.origin.y += (CGRectGetHeight(squareHUDRect) - CGRectGetWidth(squareHUDRect)) * .5f;
+		squareHUDRect.size.height = CGRectGetWidth(squareHUDRect);
+	} else {
+		squareHUDRect.origin.x += (CGRectGetWidth(squareHUDRect) - CGRectGetHeight(squareHUDRect)) * .5f;
+		squareHUDRect.size.width = CGRectGetHeight(squareHUDRect);
 	}
+	self.hudImageView.frame = squareHUDRect;
+	
+	CGRect baseBounds = self.hudImageView.layer.bounds;
+	
+	NSMutableSet *takenAspectRatios = [NSMutableSet set];
+	NSMutableArray *animationKeyframes = [NSMutableArray array];
+	for (NSString *codeType in self.codeTypes) {
+		NSNumber *aspectRatio = [[self class] aspectRatioForCode:codeType];
+		if (aspectRatio == nil || [takenAspectRatios containsObject:aspectRatio]) {
+			continue; // skip unknown as well as unsupported and already present code types
+		}
+		[takenAspectRatios addObject:aspectRatio];
+		CGRect codeTypeBounds = baseBounds;
+		float rawAspectRatio = [aspectRatio floatValue];
+		if (rawAspectRatio > 1.0) {
+			codeTypeBounds.size.height /= rawAspectRatio;
+		} else {
+			codeTypeBounds.size.width *= rawAspectRatio;
+		}
+		[animationKeyframes addObject:[NSValue valueWithCGRect:codeTypeBounds]];
+	}
+	
+	// sort based on the rects area to prevent it from animating between small and large rects back and forth
+	[animationKeyframes sortUsingComparator:^NSComparisonResult(NSValue *obj1, NSValue *obj2) {
+		CGRect obj1Rect = [obj1 CGRectValue];
+		CGRect obj2Rect = [obj2 CGRectValue];
+		
+		CGFloat obj1Area = CGRectGetWidth(obj1Rect) * CGRectGetHeight(obj1Rect);
+		CGFloat obj2Area = CGRectGetWidth(obj2Rect) * CGRectGetHeight(obj2Rect);
+		
+		return [@(obj1Area) compare:@(obj2Area)];
+	}];
+	
+	[animationKeyframes addObject:animationKeyframes.firstObject]; // go around to prevent animation from jumping at the end
+	
+	CAKeyframeAnimation *hudAnimation = [CAKeyframeAnimation animationWithKeyPath:@"bounds"];
+	hudAnimation.values = animationKeyframes;
+	hudAnimation.repeatCount = HUGE_VALF;
+	hudAnimation.duration = 0.5 * self.codeTypes.count;
+	hudAnimation.calculationMode = kCAAnimationPaced;
+	[self.hudImageView.layer addAnimation:hudAnimation forKey:@"hudAnimation"];
+}
+
+- (void)updateRectOfInterest
+{
+	if (CGRectEqualToRect(self.scannerArea, CGRectZero)) {
+		self.metadataOutput.rectOfInterest = CGRectMake(0.0, 0.0, 1.0, 1.0);
+		return;
+	}
+	CGRect rectOfInterest = (CGRect){
+		.origin = {
+			.x = CGRectGetMinX(self.scannerArea) / CGRectGetWidth(self.view.bounds),
+			.y = CGRectGetMinY(self.scannerArea) / CGRectGetHeight(self.view.bounds)
+		},
+		.size = {
+			.width = CGRectGetWidth(self.scannerArea) / CGRectGetWidth(self.view.bounds),
+			.height = CGRectGetHeight(self.scannerArea) / CGRectGetHeight(self.view.bounds)
+		}
+	};
+	
+	self.metadataOutput.rectOfInterest = rectOfInterest;
 }
 
 
@@ -314,6 +428,36 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 	}
 }
 
+- (IBAction)toggleTorch:(UIBarButtonItem *)sender
+{
+	self.torchEnabled = (self.isTorchModeAvailable && !self.isTorchEnabled);
+}
+
+
+
+#pragma mark - torch mode
+
+@synthesize torchEnabled = _torchEnabled;
+
+- (void)setTorchEnabled:(BOOL)torchEnabled
+{
+	_torchEnabled = torchEnabled;
+	if (self.isTorchModeAvailable)
+	{
+		self.previewView.torchMode = (torchEnabled ? AVCaptureTorchModeOn : AVCaptureTorchModeOff);
+	}
+}
+
+- (BOOL)isTorchEnabled {
+	return _torchEnabled && self.isTorchModeAvailable;
+}
+
+- (void)setTorchButtonEnabled:(BOOL)torchButtonEnabled
+{
+	_torchButtonEnabled = torchButtonEnabled;
+	[self updateMetaData];
+}
+
 
 
 #pragma mark - capturing
@@ -325,8 +469,8 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 	NSMutableSet *objectsAdded = [NSMutableSet setWithSet:objectsStillLiving];
 	[objectsAdded minusSet:self.codesInFOV];
 	
-//	NSMutableSet *objectsUpdated = [NSMutableSet setWithSet:objectsStillLiving];
-//	[objectsUpdated intersectSet:self.codesInFOV];
+	//	NSMutableSet *objectsUpdated = [NSMutableSet setWithSet:objectsStillLiving];
+	//	[objectsUpdated intersectSet:self.codesInFOV];
 	
 	NSMutableSet *objectsMissing = [NSMutableSet setWithSet:self.codesInFOV];
 	[objectsMissing minusSet:objectsStillLiving];
@@ -337,9 +481,9 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 		if (objectsAdded.count > 0 && [self.delegate respondsToSelector:@selector(scanner:codesDidEnterFOV:)]) {
 			[self.delegate scanner:self codesDidEnterFOV:[objectsAdded copy]];
 		}
-//		if (objectsUpdated.count > 0 && [self.delegate respondsToSelector:@selector(scanner:codesDidUpdate:)]) {
-//			[self.delegate scanner:self codesDidUpdate:[objectsUpdated copy]];
-//		}
+		//		if (objectsUpdated.count > 0 && [self.delegate respondsToSelector:@selector(scanner:codesDidUpdate:)]) {
+		//			[self.delegate scanner:self codesDidUpdate:[objectsUpdated copy]];
+		//		}
 		if (objectsMissing.count > 0 && [self.delegate respondsToSelector:@selector(scanner:codesDidLeaveFOV:)]) {
 			[self.delegate scanner:self codesDidLeaveFOV:[objectsMissing copy]];
 		}
@@ -349,6 +493,19 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 
 
 #pragma mark - accessors
+
+- (void)setScannerArea:(CGRect)scannerArea
+{
+	_scannerArea = scannerArea;
+	if (self.isViewLoaded) {
+		[self updateRectOfInterest];
+	}
+}
+
+- (BOOL)isTorchModeAvailable
+{
+	return self.previewView.isTorchModeAvailable;
+}
 
 - (BCVideoPreviewView *)previewView
 {

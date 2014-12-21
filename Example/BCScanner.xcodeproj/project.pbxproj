@@ -7,16 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4C168BA717E4745000D9404D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C168BA617E4745000D9404D /* Foundation.framework */; };
-		4C168BAC17E4745100D9404D /* BCScannerViewController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4C168BAB17E4745100D9404D /* BCScannerViewController.h */; };
-		4C168BAE17E4745100D9404D /* BCScannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C168BAD17E4745100D9404D /* BCScannerViewController.m */; };
+		498E41D937E044979A668BFD /* libPods-BCScannerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 939579A71EEF45F684396ACC /* libPods-BCScannerTests.a */; };
 		4C168BB517E4745100D9404D /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C168BB417E4745100D9404D /* XCTest.framework */; };
 		4C168BB617E4745100D9404D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C168BA617E4745000D9404D /* Foundation.framework */; };
 		4C168BB817E4745100D9404D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C168BB717E4745100D9404D /* UIKit.framework */; };
-		4C168BBB17E4745100D9404D /* libBCScanner.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C168BA317E4745000D9404D /* libBCScanner.a */; };
 		4C168BC117E4745100D9404D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4C168BBF17E4745100D9404D /* InfoPlist.strings */; };
 		4C168BC317E4745100D9404D /* BCScannerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C168BC217E4745100D9404D /* BCScannerTests.m */; };
-		4C168BCF17E477F800D9404D /* BCVideoPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C168BCE17E477F800D9404D /* BCVideoPreviewView.m */; };
 		4C168BD517E4A30600D9404D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C168BA617E4745000D9404D /* Foundation.framework */; };
 		4C168BD717E4A30600D9404D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C168BD617E4A30600D9404D /* CoreGraphics.framework */; };
 		4C168BD817E4A30600D9404D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C168BB717E4745100D9404D /* UIKit.framework */; };
@@ -26,56 +22,20 @@
 		4C168BE617E4A30600D9404D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C168BE517E4A30600D9404D /* Images.xcassets */; };
 		4C168C0017E4A33200D9404D /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C168BFF17E4A33200D9404D /* MainStoryboard.storyboard */; };
 		4C168C0317E4A3AE00D9404D /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C168C0217E4A3AE00D9404D /* MainViewController.m */; };
-		4C168C0617E4A40200D9404D /* libBCScanner.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C168BA317E4745000D9404D /* libBCScanner.a */; };
-		4C168C0817E4A43F00D9404D /* BCScannerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C168BAB17E4745100D9404D /* BCScannerViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4C168C0917E4A44200D9404D /* BCVideoPreviewView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C168BCD17E477F800D9404D /* BCVideoPreviewView.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		4C168C0B17E4A99E00D9404D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C168C0A17E4A99E00D9404D /* AVFoundation.framework */; };
+		9FCC48589273438391D1B039 /* libPods-BCScannerExample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F6EF8D0F93C14BE7A2124721 /* libPods-BCScannerExample.a */; };
+		D14BE04BED99480FBE1FD210 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91C37C188D0041E9A845B891 /* libPods.a */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		4C168BB917E4745100D9404D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4C168B9B17E4745000D9404D /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4C168BA217E4745000D9404D;
-			remoteInfo = BCSanner;
-		};
-		4C168C0417E4A3FE00D9404D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4C168B9B17E4745000D9404D /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4C168BA217E4745000D9404D;
-			remoteInfo = BCSanner;
-		};
-/* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		4C168BA117E4745000D9404D /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "include/$(PRODUCT_NAME)";
-			dstSubfolderSpec = 16;
-			files = (
-				4C168BAC17E4745100D9404D /* BCScannerViewController.h in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		4C168BA317E4745000D9404D /* libBCScanner.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBCScanner.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		44D254B662064F1BB6EBFEC8 /* Pods-BCScannerExample.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BCScannerExample.xcconfig"; path = "Pods/Pods-BCScannerExample.xcconfig"; sourceTree = "<group>"; };
 		4C168BA617E4745000D9404D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		4C168BAA17E4745100D9404D /* BCScanner-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BCScanner-Prefix.pch"; sourceTree = "<group>"; };
-		4C168BAB17E4745100D9404D /* BCScannerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BCScannerViewController.h; sourceTree = "<group>"; };
-		4C168BAD17E4745100D9404D /* BCScannerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BCScannerViewController.m; sourceTree = "<group>"; };
 		4C168BB317E4745100D9404D /* BCScannerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BCScannerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C168BB417E4745100D9404D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		4C168BB717E4745100D9404D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		4C168BBE17E4745100D9404D /* BCScannerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BCScannerTests-Info.plist"; sourceTree = "<group>"; };
 		4C168BC017E4745100D9404D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4C168BC217E4745100D9404D /* BCScannerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BCScannerTests.m; sourceTree = "<group>"; };
-		4C168BCD17E477F800D9404D /* BCVideoPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCVideoPreviewView.h; sourceTree = "<group>"; };
-		4C168BCE17E477F800D9404D /* BCVideoPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCVideoPreviewView.m; sourceTree = "<group>"; };
 		4C168BD417E4A30600D9404D /* BCScannerExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BCScannerExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C168BD617E4A30600D9404D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		4C168BDB17E4A30600D9404D /* BCScannerExample-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BCScannerExample-Info.plist"; sourceTree = "<group>"; };
@@ -89,17 +49,14 @@
 		4C168C0117E4A3AE00D9404D /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		4C168C0217E4A3AE00D9404D /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		4C168C0A17E4A99E00D9404D /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		91C37C188D0041E9A845B891 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		939579A71EEF45F684396ACC /* libPods-BCScannerTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BCScannerTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E978E4E267054A3CA36CFB5C /* Pods-BCScannerTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BCScannerTests.xcconfig"; path = "Pods/Pods-BCScannerTests.xcconfig"; sourceTree = "<group>"; };
+		F6EF8D0F93C14BE7A2124721 /* libPods-BCScannerExample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BCScannerExample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F9AEBEB0AA904E18BE4FEC2C /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		4C168BA017E4745000D9404D /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4C168BA717E4745000D9404D /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		4C168BB017E4745100D9404D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -107,7 +64,8 @@
 				4C168BB517E4745100D9404D /* XCTest.framework in Frameworks */,
 				4C168BB817E4745100D9404D /* UIKit.framework in Frameworks */,
 				4C168BB617E4745100D9404D /* Foundation.framework in Frameworks */,
-				4C168BBB17E4745100D9404D /* libBCScanner.a in Frameworks */,
+				D14BE04BED99480FBE1FD210 /* libPods.a in Frameworks */,
+				498E41D937E044979A668BFD /* libPods-BCScannerTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,10 +74,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C168C0B17E4A99E00D9404D /* AVFoundation.framework in Frameworks */,
-				4C168C0617E4A40200D9404D /* libBCScanner.a in Frameworks */,
 				4C168BD717E4A30600D9404D /* CoreGraphics.framework in Frameworks */,
 				4C168BD817E4A30600D9404D /* UIKit.framework in Frameworks */,
 				4C168BD517E4A30600D9404D /* Foundation.framework in Frameworks */,
+				9FCC48589273438391D1B039 /* libPods-BCScannerExample.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -129,18 +87,19 @@
 		4C168B9A17E4745000D9404D = {
 			isa = PBXGroup;
 			children = (
-				4C168BA817E4745100D9404D /* BCScanner */,
 				4C168BBC17E4745100D9404D /* BCSannerTests */,
 				4C168BD917E4A30600D9404D /* BCScannerExample */,
 				4C168BA517E4745000D9404D /* Frameworks */,
 				4C168BA417E4745000D9404D /* Products */,
+				F9AEBEB0AA904E18BE4FEC2C /* Pods.xcconfig */,
+				44D254B662064F1BB6EBFEC8 /* Pods-BCScannerExample.xcconfig */,
+				E978E4E267054A3CA36CFB5C /* Pods-BCScannerTests.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
 		4C168BA417E4745000D9404D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4C168BA317E4745000D9404D /* libBCScanner.a */,
 				4C168BB317E4745100D9404D /* BCScannerTests.xctest */,
 				4C168BD417E4A30600D9404D /* BCScannerExample.app */,
 			);
@@ -155,27 +114,11 @@
 				4C168BB417E4745100D9404D /* XCTest.framework */,
 				4C168BB717E4745100D9404D /* UIKit.framework */,
 				4C168BD617E4A30600D9404D /* CoreGraphics.framework */,
+				91C37C188D0041E9A845B891 /* libPods.a */,
+				F6EF8D0F93C14BE7A2124721 /* libPods-BCScannerExample.a */,
+				939579A71EEF45F684396ACC /* libPods-BCScannerTests.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		4C168BA817E4745100D9404D /* BCScanner */ = {
-			isa = PBXGroup;
-			children = (
-				4C168BCC17E477D300D9404D /* Private */,
-				4C168BAB17E4745100D9404D /* BCScannerViewController.h */,
-				4C168BAD17E4745100D9404D /* BCScannerViewController.m */,
-				4C168BA917E4745100D9404D /* Supporting Files */,
-			);
-			path = BCScanner;
-			sourceTree = "<group>";
-		};
-		4C168BA917E4745100D9404D /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				4C168BAA17E4745100D9404D /* BCScanner-Prefix.pch */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		4C168BBC17E4745100D9404D /* BCSannerTests */ = {
@@ -195,15 +138,6 @@
 				4C168BBF17E4745100D9404D /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		4C168BCC17E477D300D9404D /* Private */ = {
-			isa = PBXGroup;
-			children = (
-				4C168BCD17E477F800D9404D /* BCVideoPreviewView.h */,
-				4C168BCE17E477F800D9404D /* BCVideoPreviewView.m */,
-			);
-			path = Private;
 			sourceTree = "<group>";
 		};
 		4C168BD917E4A30600D9404D /* BCScannerExample */ = {
@@ -233,49 +167,20 @@
 		};
 /* End PBXGroup section */
 
-/* Begin PBXHeadersBuildPhase section */
-		4C168C0717E4A43200D9404D /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4C168C0817E4A43F00D9404D /* BCScannerViewController.h in Headers */,
-				4C168C0917E4A44200D9404D /* BCVideoPreviewView.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
-
 /* Begin PBXNativeTarget section */
-		4C168BA217E4745000D9404D /* BCScanner */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 4C168BC617E4745100D9404D /* Build configuration list for PBXNativeTarget "BCScanner" */;
-			buildPhases = (
-				4C168B9F17E4745000D9404D /* Sources */,
-				4C168BA017E4745000D9404D /* Frameworks */,
-				4C168BA117E4745000D9404D /* CopyFiles */,
-				4C168C0717E4A43200D9404D /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = BCScanner;
-			productName = BCSanner;
-			productReference = 4C168BA317E4745000D9404D /* libBCScanner.a */;
-			productType = "com.apple.product-type.library.static";
-		};
 		4C168BB217E4745100D9404D /* BCScannerTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4C168BC917E4745100D9404D /* Build configuration list for PBXNativeTarget "BCScannerTests" */;
 			buildPhases = (
+				97D92FC018014D0D8AC0FCE8 /* Check Pods Manifest.lock */,
 				4C168BAF17E4745100D9404D /* Sources */,
 				4C168BB017E4745100D9404D /* Frameworks */,
 				4C168BB117E4745100D9404D /* Resources */,
+				E758E41672C249D7A7B0EA49 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				4C168BBA17E4745100D9404D /* PBXTargetDependency */,
 			);
 			name = BCScannerTests;
 			productName = BCSannerTests;
@@ -286,14 +191,15 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4C168BF917E4A30600D9404D /* Build configuration list for PBXNativeTarget "BCScannerExample" */;
 			buildPhases = (
+				9D8E866EF4D34B98BE9322E3 /* Check Pods Manifest.lock */,
 				4C168BD017E4A30600D9404D /* Sources */,
 				4C168BD117E4A30600D9404D /* Frameworks */,
 				4C168BD217E4A30600D9404D /* Resources */,
+				D3910FF268CD4D0BA11FEF8F /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				4C168C0517E4A3FE00D9404D /* PBXTargetDependency */,
 			);
 			name = BCScannerExample;
 			productName = BCScannerExample;
@@ -312,6 +218,9 @@
 					4C168BB217E4745100D9404D = {
 						TestTargetID = 4C168BD317E4A30600D9404D;
 					};
+					4C168BD317E4A30600D9404D = {
+						DevelopmentTeam = 2K8K37TB9L;
+					};
 				};
 			};
 			buildConfigurationList = 4C168B9E17E4745000D9404D /* Build configuration list for PBXProject "BCScanner" */;
@@ -326,9 +235,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4C168BA217E4745000D9404D /* BCScanner */,
-				4C168BB217E4745100D9404D /* BCScannerTests */,
 				4C168BD317E4A30600D9404D /* BCScannerExample */,
+				4C168BB217E4745100D9404D /* BCScannerTests */,
 			);
 		};
 /* End PBXProject section */
@@ -354,16 +262,70 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXSourcesBuildPhase section */
-		4C168B9F17E4745000D9404D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
+/* Begin PBXShellScriptBuildPhase section */
+		97D92FC018014D0D8AC0FCE8 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C168BCF17E477F800D9404D /* BCVideoPreviewView.m in Sources */,
-				4C168BAE17E4745100D9404D /* BCScannerViewController.m in Sources */,
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
 		};
+		9D8E866EF4D34B98BE9322E3 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D3910FF268CD4D0BA11FEF8F /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-BCScannerExample-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E758E41672C249D7A7B0EA49 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-BCScannerTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
 		4C168BAF17E4745100D9404D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -383,19 +345,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		4C168BBA17E4745100D9404D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 4C168BA217E4745000D9404D /* BCScanner */;
-			targetProxy = 4C168BB917E4745100D9404D /* PBXContainerItemProxy */;
-		};
-		4C168C0517E4A3FE00D9404D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 4C168BA217E4745000D9404D /* BCScanner */;
-			targetProxy = 4C168C0417E4A3FE00D9404D /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		4C168BBF17E4745100D9404D /* InfoPlist.strings */ = {
@@ -487,36 +436,9 @@
 			};
 			name = Release;
 		};
-		4C168BC717E4745100D9404D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DSTROOT = /tmp/BCScanner.dst;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "BCScanner/BCScanner-Prefix.pch";
-				OTHER_LDFLAGS = "-ObjC";
-				PRIVATE_HEADERS_FOLDER_PATH = "../../Headers/$(PRODUCT_NAME)/Private";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "../../Headers/$(PRODUCT_NAME)";
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		4C168BC817E4745100D9404D /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DSTROOT = /tmp/BCScanner.dst;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "BCScanner/BCScanner-Prefix.pch";
-				OTHER_LDFLAGS = "-ObjC";
-				PRIVATE_HEADERS_FOLDER_PATH = "../../Headers/$(PRODUCT_NAME)/Private";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "../../Headers/$(PRODUCT_NAME)";
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
 		4C168BCA17E4745100D9404D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E978E4E267054A3CA36CFB5C /* Pods-BCScannerTests.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/BCScannerExample.app/BCScannerExample";
@@ -540,6 +462,7 @@
 		};
 		4C168BCB17E4745100D9404D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E978E4E267054A3CA36CFB5C /* Pods-BCScannerTests.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/BCScannerExample.app/BCScannerExample";
@@ -559,10 +482,12 @@
 		};
 		4C168BFA17E4A30600D9404D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 44D254B662064F1BB6EBFEC8 /* Pods-BCScannerExample.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -580,16 +505,19 @@
 				);
 				INFOPLIST_FILE = "BCScannerExample/BCScannerExample-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
 		4C168BFB17E4A30600D9404D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 44D254B662064F1BB6EBFEC8 /* Pods-BCScannerExample.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -603,6 +531,7 @@
 				);
 				INFOPLIST_FILE = "BCScannerExample/BCScannerExample-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -619,14 +548,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4C168BC617E4745100D9404D /* Build configuration list for PBXNativeTarget "BCScanner" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				4C168BC717E4745100D9404D /* Debug */,
-				4C168BC817E4745100D9404D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-		};
 		4C168BC917E4745100D9404D /* Build configuration list for PBXNativeTarget "BCScannerTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -634,6 +555,7 @@
 				4C168BCB17E4745100D9404D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4C168BF917E4A30600D9404D /* Build configuration list for PBXNativeTarget "BCScannerExample" */ = {
 			isa = XCConfigurationList;
@@ -642,6 +564,7 @@
 				4C168BFB17E4A30600D9404D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
