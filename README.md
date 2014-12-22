@@ -2,11 +2,11 @@
 
 ![version tag](https://img.shields.io/github/tag/michaelochs/bcscanner.svg?style=flat-square)
 ![release](https://img.shields.io/github/release/michaelochs/bcscanner.svg?style=flat-square)
-![cocoapods version](https://img.shields.io/cocoapods/v/bcscanner.svg?style=flat-square)
+![cocoapods version](https://img.shields.io/cocoapods/v/BCScanner.svg?style=flat-square)
 ![open issues](https://img.shields.io/github/issues/michaelochs/bcscanner.svg?style=flat-square)
 
-![apache 2.0 license](https://img.shields.io/cocoapods/l/bcscanner.svg?style=flat-square)
-![iOS platform](https://img.shields.io/cocoapods/p/bcscanner.svg?style=flat-square)
+![apache 2.0 license](https://img.shields.io/cocoapods/l/BCScanner.svg?style=flat-square)
+![iOS platform](https://img.shields.io/cocoapods/p/BCScanner.svg?style=flat-square)
 
 `BCScanner` is a barcode and qr code scanner library that makes use of the built in `AVFoundation` code scanning capabilities. It lets you easily integrate a barcode or qr code scanner into your application without dealing with `AVFoundation`.
 
