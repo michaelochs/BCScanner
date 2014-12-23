@@ -153,6 +153,7 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 						BCScannerAztecCode: AVMetadataObjectTypeAztecCode,
 						};
 		
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
 		NSMutableDictionary *optionalCodeTypes = [NSMutableDictionary new];
 		if (&AVMetadataObjectTypeInterleaved2of5Code) {
 			optionalCodeTypes[BCScannerI25Code] = AVMetadataObjectTypeInterleaved2of5Code;
@@ -168,6 +169,7 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 			[optionalCodeTypes addEntriesFromDictionary:objectTypes];
 			objectTypes = [optionalCodeTypes copy];
 		}
+#endif
 	});
 	return objectTypes[code];
 }
