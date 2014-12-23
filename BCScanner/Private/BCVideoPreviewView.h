@@ -35,6 +35,5 @@
 
 - (BOOL)focusAtPoint:(CGPoint)point;
 - (BOOL)exposeAtPoint:(CGPoint)point;
-- (void)setRectOfInterest:(CGRect)rect;
 
 @end
