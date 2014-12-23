@@ -76,25 +76,6 @@ NSString *const BCScannerDataMatrixCode = @"BCScannerDataMatrixCode";
 @end
 
 
-static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspectRatio)
-{
-	CGRect frame = UIEdgeInsetsInsetRect(bounds, padding);
-	
-	CGFloat frameAspectRatio = CGRectGetWidth(frame) / CGRectGetHeight(frame);
-	CGRect hudRect = frame;
-	
-	if (aspectRatio > frameAspectRatio) {
-		hudRect.size.height = CGRectGetHeight(frame) / aspectRatio;
-		hudRect.origin.y += (CGRectGetHeight(frame) - CGRectGetHeight(hudRect)) * .5f;
-	} else {
-		hudRect.size.width = CGRectGetHeight(frame) * aspectRatio;
-		hudRect.origin.x += (CGRectGetWidth(frame) - CGRectGetWidth(hudRect)) * .5f;
-	}
-	
-	return CGRectIntegral(hudRect);
-}
-
-
 @implementation BCScannerViewController
 
 @dynamic previewView;
@@ -153,6 +134,7 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 						BCScannerAztecCode: AVMetadataObjectTypeAztecCode,
 						};
 		
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
 		NSMutableDictionary *optionalCodeTypes = [NSMutableDictionary new];
 		if (&AVMetadataObjectTypeInterleaved2of5Code) {
 			optionalCodeTypes[BCScannerI25Code] = AVMetadataObjectTypeInterleaved2of5Code;
@@ -168,6 +150,7 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 			[optionalCodeTypes addEntriesFromDictionary:objectTypes];
 			objectTypes = [optionalCodeTypes copy];
 		}
+#endif
 	});
 	return objectTypes[code];
 }
@@ -221,7 +204,7 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 {
 	BOOL isVisible = self.isViewLoaded && self.view.window;
 	if (self.isTorchButtonEnabled) {
-		UIBarButtonItem *torchToggle = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"bcscanner_torch", nil, [NSBundle mainBundle], @"Torch", @"The title of the torch mode button") style:UIBarButtonItemStyleBordered target:self action:@selector(toggleTorch:)];
+		UIBarButtonItem *torchToggle = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedStringWithDefaultValue(@"bcscanner_torch", nil, [NSBundle mainBundle], @"Torch", @"The title of the torch mode button") style:UIBarButtonItemStylePlain target:self action:@selector(toggleTorch:)];
 		[self.navigationItem setRightBarButtonItem:torchToggle animated:isVisible];
 	} else {
 		[self.navigationItem setRightBarButtonItem:nil animated:isVisible];
@@ -401,17 +384,8 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 		self.metadataOutput.rectOfInterest = CGRectMake(0.0, 0.0, 1.0, 1.0);
 		return;
 	}
-	CGRect rectOfInterest = (CGRect){
-		.origin = {
-			.x = CGRectGetMinX(self.scannerArea) / CGRectGetWidth(self.view.bounds),
-			.y = CGRectGetMinY(self.scannerArea) / CGRectGetHeight(self.view.bounds)
-		},
-		.size = {
-			.width = CGRectGetWidth(self.scannerArea) / CGRectGetWidth(self.view.bounds),
-			.height = CGRectGetHeight(self.scannerArea) / CGRectGetHeight(self.view.bounds)
-		}
-	};
 	
+	CGRect rectOfInterest = [self.previewView.previewLayer metadataOutputRectOfInterestForRect:self.scannerArea];
 	self.metadataOutput.rectOfInterest = rectOfInterest;
 }
 

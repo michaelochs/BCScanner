@@ -22,8 +22,6 @@
 
 @interface BCVideoPreviewView ()
 
-@property (nonatomic, strong, readonly) AVCaptureVideoPreviewLayer *previewLayer;
-
 @end
 
 
