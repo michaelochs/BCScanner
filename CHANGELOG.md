@@ -1,6 +1,11 @@
-#Changelog
+# Changelog
 
 The versioning in this project is based on [Semantic Versioning](http://semver.org).
+
+## v0.1.1
+- Fix issues with the scanner area property
+- Reenables iOS7 support
+- Removes warnings
 
 ## v0.1.0
 - First official release, containing support for the following code types:
