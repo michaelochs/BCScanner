@@ -401,17 +401,8 @@ static inline CGRect HUDRect(CGRect bounds, UIEdgeInsets padding, CGFloat aspect
 		self.metadataOutput.rectOfInterest = CGRectMake(0.0, 0.0, 1.0, 1.0);
 		return;
 	}
-	CGRect rectOfInterest = (CGRect){
-		.origin = {
-			.x = CGRectGetMinX(self.scannerArea) / CGRectGetWidth(self.view.bounds),
-			.y = CGRectGetMinY(self.scannerArea) / CGRectGetHeight(self.view.bounds)
-		},
-		.size = {
-			.width = CGRectGetWidth(self.scannerArea) / CGRectGetWidth(self.view.bounds),
-			.height = CGRectGetHeight(self.scannerArea) / CGRectGetHeight(self.view.bounds)
-		}
-	};
 	
+	CGRect rectOfInterest = [self.previewView.previewLayer metadataOutputRectOfInterestForRect:self.scannerArea];
 	self.metadataOutput.rectOfInterest = rectOfInterest;
 }
 
