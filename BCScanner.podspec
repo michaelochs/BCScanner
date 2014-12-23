@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "BCScanner"
-  s.version      = "0.1.0"
+  s.version      = "0.1.1"
   s.summary      = "A barcode and qr code scanner that wraps the `AVFoundation` scanning capabilities in a `UIViewController`"
   s.homepage     = "https://github.com/michaelochs/BCScanner"
   s.license      = { :type => 'Apache License, Version 2.0', :file => 'LICENSE' }
