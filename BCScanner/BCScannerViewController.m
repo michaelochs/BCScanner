@@ -289,6 +289,7 @@ NSString *const BCScannerDataMatrixCode = @"BCScannerDataMatrixCode";
 {
 	[super viewWillAppear:animated];
 	
+	self.previewView.videoOrientation = (AVCaptureVideoOrientation)[[UIApplication sharedApplication] statusBarOrientation]; // The enum defs for UIInterfaceOrientation and AVCaptureVideoOrientation are the same!
 	[self.session startRunning];
 }
 
