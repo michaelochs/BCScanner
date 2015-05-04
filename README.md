@@ -32,7 +32,7 @@ The easiest way to install this module is to add the library through cocoapods:
 
     pod 'BCScanner'
 
-If you want to specify a certain version of `BCScanner` please note that this project uses [semantic versioning](http://semver.org). This means it is save to upgrade to every minor and patch release as this is fully backwards compatible. If you want to provide a version in your podfile, use this line:
+If you want to specify a certain version of `BCScanner` please note that this project uses [semantic versioning](http://semver.org). This means it is safe to upgrade to every minor and patch release as this is fully backwards compatible. If you want to provide a version in your podfile, use this line:
 
     pod 'BCScanner', '~> 0.1'
 
